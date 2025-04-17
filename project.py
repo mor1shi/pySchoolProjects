@@ -49,7 +49,7 @@ class textAnalyzer:
             self.textBox.insert(tk.END, "Перетащите файл .txt")
 
     def processText(self, text):
-        words = re.split(r'[ ,.!?\n]+', text)
+        words = re.split(r'[ )(,.!?\n]+', text)
         wordsLower = [word.lower() for word in words]
         wordsLower = [word for word in wordsLower if word not in self.stopWords]
         wordsCounts = Counter(wordsLower)
@@ -64,8 +64,7 @@ class textAnalyzer:
        
         for word ,count in self.wordsCounts.most_common(100):
             print(f"{word}: {count}")
-        print("All unique words ", len(self.wordsCounts))
-        #print("Array of words", self.wordsLower)
+        print("Уникальных слов ", len(self.wordsCounts)- 1)
 
         wordcloud = WordCloud(width=800, height=400, background_color='white').generate_from_frequencies(self.wordsCounts)
         plt.figure(figsize=(10, 5))
@@ -78,3 +77,4 @@ app = textAnalyzer(root)
 root.mainloop()
 
 #pip install wordcloud matplotlib numpy pillow
+#pip install tkinterdnd2
